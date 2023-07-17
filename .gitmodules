@@ -17,3 +17,6 @@
 [submodule "3rd_party_submodules/bullet-train.zsh"]
 	path = 3rd_party_submodules/bullet-train.zsh
 	url = https://github.com/caiogondim/bullet-train.zsh.git
+[submodule "Vim/bundle/Vundle.vim"]
+	path = Vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git

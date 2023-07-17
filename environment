@@ -1,0 +1,71 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto -GFh'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+else
+    alias ls='ls -GFh'
+fi
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ack='ack --pager="less -R"'
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# some more ls aliases
+alias lr='br -sdp'
+#alias la='ls -A'
+#alias l='ls -CF'
+
+# Perforce client
+#export P4PORT=192.168.1.251:1666
+#export P4USER=sdahiya
+#export P4PASSWD=1qaz-pl,
+#export P4CLIENT=sdahiya_dl-sdahiya
+#export P4EDITOR=/usr/bin/gvim
+#export PATH=/home/sdahiya/Perforce/p4v-2010.1.256349/bin:$PATH
+# SVN client
+export SVN_EDITOR=vim
+
+# PPC compiler tools
+[[ -d /opt/ppc/ecos/bin ]] && PATH=/opt/ppc/ecos/bin:$PATH
+[[ -d /opt/ppc/gnutools/gcc-3.3.6/powerpc-eabi/bin ]] && export PATH=/opt/ppc/gnutools/gcc-3.3.6/powerpc-eabi/bin:$PATH
+
+#[[ -d ~/bin ]] && PATH=$PATH:~/bin
+
+
+#alias smartsvn='SMARTSVN_JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386/ /opt/smartsvn-6_6_11/bin/smartsvn.sh'
+alias smartsvn='SMARTSVN_JAVA_HOME=/usr/java/latest /opt/smartsvn-6_6_11/bin/smartsvn.sh'
+
+alias myps='pstree -achlpu sdahiya'
+if [ -f ${HOME}/bin/nvim.appimage ]; then
+    PATH=$PATH:${HOME}/bin/vim82/bin
+    alias nvim='${HOME}/bin/nvim.appimage'
+    EDITOR=$(eval echo '${HOME}/bin/nvim.appimage')
+elif [ -f ${HOME}/bin/vim80/bin/vim ]; then
+    PATH=$PATH:${HOME}/bin/vim80/bin
+elif [ -f ${HOME}/bin/vim74/bin/vim ]; then
+    PATH=${HOME}/bin/vim74/bin:$PATH
+fi
+EDITOR=${EDITOR:-vim}
+export EDITOR
+
+alias vi='vim'
+alias spacemacs="HOME=~/.spacemacs emacs -nw"
+alias temacs="emacs -nw"
+alias sudo='sudo -E'
+alias tmux='tmux -2'
+
+# For Floaterm inside VIM
+alias ft='floaterm'
+
+# Brew GitHub token
+export HOMEBREW_GITHUB_API_TOKEN="2672be0953ae00c8288e9a5161c11f2e5d8bb4c4"
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups  

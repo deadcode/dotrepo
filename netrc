@@ -1,0 +1,6 @@
+machine api.heroku.com
+  login sdahiya@gmail.com
+  password 413ba0a1-915d-4aa1-924f-166fbf20b45d
+machine git.heroku.com
+  login sdahiya@gmail.com
+  password 413ba0a1-915d-4aa1-924f-166fbf20b45d

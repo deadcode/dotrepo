@@ -1,0 +1,26 @@
+escape ^Bb # Instead of Control-a, make the escape/command character be Control-b
+
+#autodetach on # Autodetach session on hangup instead of terminating screen completely
+
+startup_message off # Turn off the splash screen
+
+shell -/bin/bash
+
+defscrollback 15000 # Use a 30000-line scrollback buffer
+
+term xterm-color
+termcapinfo xterm* ti@:te@
+altscreen on
+# don't display the copyright page
+startup_message off
+# # visable bell
+# vbell_msg "beep"
+vbell off
+# # hardstatus
+#hardstatus alwayslastline "%{rw}%H%{wk}|%{wr}%c%{wk}|%d%M|%?%-Lw%?%{wb}%n*%f%t%?(%u)%?%{wk}%?%+Lw%?"
+caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+bindkey [1;5A focus up
+bindkey [1;5B focus down

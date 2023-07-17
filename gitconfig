@@ -1,0 +1,35 @@
+[user]
+	name = Sandeep Dahiya
+	email = sandeep.dahiya@gigamon.com
+	username = deadcode
+[color]
+	ui = auto
+	branch = auto
+	status = auto
+[color "status"]
+	added = green
+	changed = red bold
+	untracked = magenta
+[core]
+	excludesfile = /Users/sdahiya/.gitignore_global
+	ignorecase = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[branch]
+	autosetuprebase = always
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[commit]
+	template = /Users/sdahiya/.stCommitMsg
+[credential]
+	helper = cache --timeout=3600
+[alias]
+	root = rev-parse --show-toplevel
+	mod = !git status -s -uno | cut -c4-

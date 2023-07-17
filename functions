@@ -1,0 +1,254 @@
+function title ()
+{
+    echo -ne "\033]0;$1\007"
+}
+
+function tmux_title ()
+{
+    #echo -ne "\033k"$(hostname -s)::$1"\033\\"
+    echo -ne "\033k"$1"\033\\"
+}
+
+#
+# REMOTE_BOX_INFO - format
+#   target-name terminal-title term-server-ip term-server-port connection-type - ssh/telnet-ip ssh-username tunnel-remote-port tunnel-remote-ip
+#
+ARR_N=10
+REMOTE_BOX_INFO=(
+    "gv1"       "GV-1-Console"          "\${TERM_SERV_2_IP}"        "6007"  "direct" "-" "\${GV1_BOX_SSH_IP}"   "-"    "-"     "-"
+    "gv1gs"     "GV-1-GS-1-Console"     "\${TERM_SERV_2_IP}"        "10004" "-"      "-" "-"                    "-"    "-"     "-"
+    "hd1"       "HD4-1-Console"         "\${TERM_SERV_2_IP}"        "6010"  "direct" "-" "\${HD1_BOX_SSH_IP}"   "root" "-"     "-"
+    "hd1gs1-1"  "HD4-1-GS1-1-Console"   "\${TERM_SERV_2_IP}"        "6032"  "tunnel" "-" "\${HD1_BOX_SSH_IP}"   "root" "40000" "12.19.148.17"
+    "hd1gs1-2"  "HD4-1-GS1-2-Console"   "\${TERM_SERV_5_IP}"        "6044"  "tunnel" "-" "\${HD1_BOX_SSH_IP}"   "root" "40001" "12.19.148.18"
+    "hd1gs2-1"  "HD4-1-GS2-1-Console"   "\${TERM_SERV_2_IP}"        "10006" "tunnel" "-" "\${HD1_BOX_SSH_IP}"   "root" "40002" "12.19.148.19"
+    "hd1gs2-2"  "HD4-1-GS2-2-Console"   "\${TERM_SERV_2_IP}"        "10007" "tunnel" "-" "\${HD1_BOX_SSH_IP}"   "root" "40003" "12.19.148.20"
+    "hb1-1"     "HB1-1-Console"         "\${TERM_SERV_2_IP}"        "6004"  "direct" "-" "\${HB1_1_BOX_SSH_IP}" "root" "-"     "-"
+    "hb1-1gs"   "HB1-1-GS-Console"      "\${TERM_SERV_2_IP}"        "6030 " "tunnel" "-" "\${HB1_1_BOX_SSH_IP}" "root" "40004" "12.19.148.18"
+    "hb1-2"     "HB1-2-Console"         "\${TERM_SERV_2_IP}"        "10013" "direct" "-" "\${HB1_2_BOX_SSH_IP}" "root" "-"     "-"
+    "hb1-2gs"   "HB1-2-GS-Console"      "\${TERM_SERV_4_IP}"        "10007" "tunnel" "-" "\${HB1_2_BOX_SSH_IP}" "root" "40004" "12.19.148.18"
+    "hc2-1"     "HC2-1-Console"         "\${TERM_SERV_5_IP}"        "6035"  "direct" "-" "\${HC2_1_BOX_SSH_IP}" "root" "-"     "-"
+    "hc2-1-gs1" "HC2-1-GS1-Console"     "\${TERM_SERV_5_IP}"        "6036"  "tunnel" "-" "\${HC2_1_BOX_SSH_IP}" "root" "40005" "12.19.148.17"
+    "hc1-1"      "HC1-1-Console"        "\${TERM_SERV_A13}"         "6045"  "direct" "-" "\${HC1_1_BOX_SSH_IP}" "admin" "-"     "-"
+    "hc1-3"      "HC1-3-Console"        "\${TERM_SERV_9_IP}"        "6019"  "direct" "-" "\${HC1_3_BOX_SSH_IP}" "admin" "-"     "-"
+    "hc3-1"      "HC3-1-Console"        "\${TERM_SERV_6_IP}"        "6043"  "direct" "-" "\${HC3_1_BOX_SSH_IP}" "admin" "-"     "-"
+    "hc3-2"      "HC3-2-Console"        "\${TERM_SERV_7_IP}"        "6020"  "direct" "-" "\${HC3_2_BOX_SSH_IP}" "admin" "-"     "-"
+    "hc3-3"      "HC3-3-Console"        "\${TERM_SERV_8_IP}"        "6023"  "direct" "-" "\${HC3_3_BOX_SSH_IP}" "admin" "-"     "-"
+    "nfv-1"      "NFV-1-Console"        "\${TERM_VM_1_IP}"          "23"    "direct" "-" "\${VM1_BOX_SSH_IP}"   "root"  "-"     "-"
+    "evb78xx-mcu" "CN78XX-EVB-MCU"      "\${TERM_SERV_HW_LAB_1_IP}" "10001" "direct" "-" "-"                    "-"    "-"     "-" 
+    "evb78xx-oct" "CN78XX-EVB-OCT"      "\${TERM_SERV_HW_LAB_1_IP}" "10015" "direct" "-" "-"                    "-"    "-"     "-"
+    "evb73xx-mcu" "CN73XX-EVB-MCU"      "\${TERM_SERV_HW_LAB_2_IP}" "10015" "direct" "-" "-"                    "-"    "-"     "-"
+    "evb73xx-oct" "CN73XX-EVB-OCT"      "\${TERM_SERV_HW_LAB_2_IP}" "10010" "direct" "-" "-"                    "-"    "-"     "-"
+    );
+
+export TERM_SERV_1_IP="10.150.26.12"
+export TERM_SERV_2_IP="10.120.6.146"
+export TERM_SERV_3_IP="10.150.27.11"
+export TERM_SERV_4_IP="10.150.26.10"
+export TERM_SERV_5_IP="10.120.6.148"
+export TERM_SERV_6_IP="10.120.6.196"
+export TERM_SERV_7_IP="10.120.6.190"
+export TERM_SERV_8_IP="10.120.6.161"
+export TERM_SERV_9_IP="10.120.6.207"
+export TERM_SERV_HW_LAB_1_IP="10.115.224.50"
+export TERM_SERV_HW_LAB_2_IP="10.115.224.51"
+export TERM_SERV_A13="10.120.6.113"
+export TERM_VM_1_IP="1.2.3.4"
+
+export HD1_BOX_SSH_IP="10.115.14.11"
+export HB1_1_BOX_SSH_IP="10.115.14.9"
+export HC2_1_BOX_SSH_IP="10.115.126.25"
+export HC3_1_BOX_SSH_IP="10.115.78.52"
+export HC3_2_BOX_SSH_IP="10.115.94.6"
+export HC3_3_BOX_SSH_IP="10.115.182.84"
+export HC1_1_BOX_SSH_IP="10.115.30.4"
+export HC1_3_BOX_SSH_IP="10.115.78.51"
+export VM1_BOX_SSH_IP="10.115.27.84"
+
+export GMTAP_UA_SSH_IP="10.115.126.201"
+export GMTAP_UB_SSH_IP="10.115.126.202"
+export GMTAP_UC_SSH_IP="10.115.126.203"
+export GMTAP_UD_SSH_IP="10.115.126.204"
+export GMTAP_LA_SSH_IP="10.115.126.205"
+export GMTAP_LB_SSH_IP="10.115.126.206"
+export GMTAP_LC_SSH_IP="10.115.126.207"
+export GMTAP_LD_SSH_IP="10.115.126.208"
+
+function connect ()
+{
+    local con_type="console"
+    local target=1
+    local list_target=0
+    declare -a target_info=()
+
+    setopt KSH_ARRAYS
+    if [[ $1 == "-t" ]]; then
+        con_type="ssh"
+        shift
+    elif [[ $1 == "-l" ]]; then
+        echo -n "Targets: "
+        for (( i=0 ; i<${#REMOTE_BOX_INFO[@]} ; i+=${ARR_N} )) do
+            echo -n "${REMOTE_BOX_INFO[${i}]} "
+        done
+        echo
+        return 0
+    elif [[ $1 == "-L" ]]; then
+        list_target=1
+        shift
+    fi
+    target=$1
+
+    for (( i=0 ; i<${#REMOTE_BOX_INFO[@]} ; i+=${ARR_N} )) do
+        if [[ "${target}" == "${REMOTE_BOX_INFO[${i}]}" ]]; then
+            target_info=(${REMOTE_BOX_INFO[@]:${i}:${ARR_N}})
+            break
+        fi
+    done
+    if [[ ${i} -ge ${#REMOTE_BOX_INFO[@]} ]]; then
+        echo "Unknown target"
+        return 1
+    fi
+
+    if [[ ${list_target} -eq 1 ]]; then
+        echo "${target_info[@]}"
+        return 0
+    fi
+
+    for (( i=0 ; i<${#target_info[@]} ; i+=1 )) do
+        if [[ "${target_info[${i}]}" = \$* ]]; then
+            eval foo="${target_info[${i}]}"
+            if [[ "x${foo}" = "x" ]]; then echo "Please set ${target_info[${i}]}"; fi
+            eval target_info[${i}]="${foo}"
+        fi
+    done
+
+    read target_title target_term_ip target_term_port target_con_type target_ssh_key target_ip target_uname target_tun_lport target_tun_rip <<<$(echo ${target_info[@]:1})
+
+    echo "$target_title $target_term_ip $target_term_port $target_con_type $target_ssh_key $target_ip $target_uname $target_tun_lport $target_tun_rip"
+
+    if [[ "${con_type}" = "ssh" ]] && [[ "${target_con_type}" = "tunnel" ]]; then
+        con_type="${target_con_type}"
+    fi
+
+    case ${con_type} in
+        "console")
+            echo "Connecting to ${target_term_ip}:${target_term_port}"
+            title "${target_title}"
+            tmux_title "${target_title}"
+            telnet "${target_term_ip}" "${target_term_port}"
+            ;;
+        "ssh")
+            local SSH_CMD="ssh"
+            echo "Connecting to ${target_ip}:ssh"
+            title "${target_title}-SSH"
+            tmux_title "${target_title}-SSH"
+            if [[ ${target_ssh_key} != "-" ]]; then
+                SSH_CMD="ssh -i ${target_ssh_key}"
+            fi
+            ${SSH_CMD} ${target_uname}@"${target_ip}"
+            ;;
+        "tunnel")
+            echo "Connecting to ${target_uname}@${target_ip} ${target_tun_lport}:${target_tun_rip}:23"
+            title "${target_title}-SSH"
+            tmux_title "${target_title}-SSH"
+            ssh_tun_cmd="ssh -N -f -T -L ${target_tun_lport}:${target_tun_rip}:23 ${target_uname}@${target_ip}"
+            ps -aefl | grep "${ssh_tun_cmd}" | grep -v "grep " >/dev/null 2>&1
+            if [ $? -ne 0 ]; then
+                $(${ssh_tun_cmd}) &
+                sleep 2
+            fi
+            telnet localhost ${target_tun_lport}
+            ;;
+        *)
+            echo "Unknown connect mode"
+            return 2
+            ;;
+    esac
+
+    return 0
+}
+
+alias tconnect="connect -t"
+
+function gvimd ()
+{
+    gvim -d $1 $FOO/$1
+}
+
+function update_gs_cscope_db ()
+{
+    if [ -z ${PROD_CUSTOMER_ROOT} ]; then
+        echo "Please specify the working directory by sourcing the setup file"
+        return 1
+    fi
+
+    pushd ${PROD_CUSTOMER_ROOT}/gigasmart/
+
+    local -a src_dirs=(${PROD_CUSTOMER_ROOT}/gigasmart/
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/cli
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/gsd
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/licd
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/mgmtd
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/netdevd
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/bin/peripd
+                       ${PROD_CUSTOMER_ROOT}/gigavue/src/lib)
+
+    if [ -d ${PROD_CUSTOMER_ROOT}/../fir/tree/output/${GIGAMON_GS_BOARD}/Cavium_Networks/OCTEON-SDK/executive/ ]; then
+        src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/${GIGAMON_GS_BOARD}/Cavium_Networks/OCTEON-SDK/executive/)
+        src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/${GIGAMON_GS_BOARD}/Cavium_Networks/OCTEON-SDK/components/)
+    fi
+    #if [ -d ${PROD_CUSTOMER_ROOT}/../fir/tree/output/HDGS/Cavium_Networks/OCTEON-SDK/executive/ ]; then
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HDGS/Cavium_Networks/OCTEON-SDK/executive/)
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HDGS/Cavium_Networks/OCTEON-SDK/components/)
+    #fi
+    #if [ -d ${PROD_CUSTOMER_ROOT}/../fir/tree/output/HB1/Cavium_Networks/OCTEON-SDK/executive/ ]; then
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HB1/Cavium_Networks/OCTEON-SDK/executive/)
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HB1/Cavium_Networks/OCTEON-SDK/components/)
+    #fi
+    #if [ -d ${PROD_CUSTOMER_ROOT}/../fir/tree/output/HC2/Cavium_Networks/OCTEON-SDK/executive/ ]; then
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HC2/Cavium_Networks/OCTEON-SDK/executive/)
+    #    src_dirs+=(${PROD_CUSTOMER_ROOT}/../fir/tree/output/HC2/Cavium_Networks/OCTEON-SDK/components/)
+    #fi
+
+    echo "Directories = ${src_dirs[*]}"
+    local -a src_files=($(find ${src_dirs[*]} \( -name .svn -prune -o -name obj* -prune \) -o \( -type f -name "*[chx]" -print \)))
+    echo "Number of files to index = ${#src_files[@]}"
+    > cscope.files
+    for f in "${src_files[@]}"; do
+        echo "$f" >> cscope.files
+    done
+
+    #cscope -b -k -q -v ${src_files[*]}
+    cscope -b -k -q -v -i cscope.files
+
+    popd
+}
+
+function svnfind ()
+{
+    d=$1
+    shift
+    find $d -not -path "*/\.*" $*
+}
+
+function termcolors ()
+{
+    if [ -n "$ZSH_VERSION" ]; then
+        for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+    elif [ -n "$BASH_VERSION" ]; then
+        for colour in {1..225}; do echo -en "\033[38;5;${colour}m38;5;${colour} \n"; done | column -x
+    fi
+}
+
+function version_greater_equal()
+{
+    printf '%s\n%s\n' "$2" "$1" | sort --check=quiet --version-sort
+}
+
+function cdg()
+{
+    cd $(git root)
+}
+
+if [ -f ~/dotrepo/broot/launcher/bash/br ]; then
+    source ~/dotrepo/broot/launcher/bash/br
+fi

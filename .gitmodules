@@ -2,3 +2,18 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "oh_my_zsh"]
+	path = oh_my_zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "3rd_party_submodules/powerlevel10k"]
+	path = 3rd_party_submodules/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "3rd_party_submodules/powerlevel9k"]
+	path = 3rd_party_submodules/powerlevel9k
+	url = https://github.com/Powerlevel9k/powerlevel9k.git
+[submodule "3rd_party_submodules/agnosterzak-ohmyzsh-theme"]
+	path = 3rd_party_submodules/agnosterzak-ohmyzsh-theme
+	url = https://github.com/zakaziko99/agnosterzak-ohmyzsh-theme.git
+[submodule "3rd_party_submodules/bullet-train.zsh"]
+	path = 3rd_party_submodules/bullet-train.zsh
+	url = https://github.com/caiogondim/bullet-train.zsh.git

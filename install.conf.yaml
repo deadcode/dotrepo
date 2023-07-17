@@ -17,7 +17,7 @@
     ~/.ssh: ssh.keys
     ~/.vim: Vim
     ~/.aws: aws
-    ~/.config/htop: htop
+    ~/.config/htop: config/htop
     ~/.oh-my-zsh: oh_my_zsh
 
 - create:

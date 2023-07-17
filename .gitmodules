@@ -23,3 +23,6 @@
 [submodule "tmux.tpm/plugins/tpm"]
 	path = tmux.tpm/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "solarized"]
+	path = solarized
+	url = https://github.com/altercation/solarized

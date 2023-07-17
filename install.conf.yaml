@@ -31,6 +31,7 @@
   - [chmod 700 ssh.keys/id_rsa*]
   - [chmod 700 ssh.keys/gmtap_rsa*]
   - [chmod 700 ssh.keys/github_rsa*]
+  - [cp -f ssh.keys/aws.credentials aws/credentials]
   - [rm -f ~/.bashrc ~/.zshrc]
   - [cp -f .bashrc ~/]
   - [cp -f .zshrc ~/]

@@ -1,0 +1,40 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.bash_profile: bash_profile
+    ~/.tmux.conf: tmux.conf
+    ~/.tmux: tmux.tpm
+    ~/.gitconfig: gitconfig
+    ~/.profile: profile
+    ~/.toprc: toprc
+    ~/.netrc: netrc
+    ~/.vimrc: vimrc
+    ~/.gvimrc: gvimrc
+    ~/.ssh: ssh.keys
+    ~/.vim: Vim
+    ~/.aws: aws
+    ~/.config/htop: htop
+    ~/.oh-my-zsh: oh_my_zsh
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+    - ~/tmp/
+    - ~/.config
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [chmod 700 ssh.keys/id_rsa*]
+  - [chmod 700 ssh.keys/gmtap_rsa*]
+  - [chmod 700 ssh.keys/github_rsa*]
+  - [rm -f ~/.bashrc ~/.zshrc]
+  - [cp -f .bashrc ~/]
+  - [cp -f .zshrc ~/]
+  - [cp -rf 3rd_party_submodules/agnosterzak-ohmyzsh-theme/ oh_my_zsh/custom/themes]
+  - [cp -rf 3rd_party_submodules/bullet-train.zsh/ oh_my_zsh/custom/themes]
+  - [cp -rf 3rd_party_submodules/powerlevel10k/ oh_my_zsh/custom/themes]
+  - [cp -rf 3rd_party_submodules/powerlevel9k/ oh_my_zsh/custom/themes]

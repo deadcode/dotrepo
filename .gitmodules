@@ -20,3 +20,6 @@
 [submodule "Vim/bundle/Vundle.vim"]
 	path = Vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "tmux.tpm/plugins/tpm"]
+	path = tmux.tpm/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

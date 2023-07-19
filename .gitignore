@@ -1,6 +1,6 @@
 Vim/bundle/*
 tmux.tpm/plugins/*
 aws/*
-bin/broot_*
+bin/broot*
 bin/nvim.appimage
 bin/squashfs-root/

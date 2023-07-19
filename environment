@@ -46,6 +46,9 @@ alias myps='pstree -achlpu sdahiya'
 if [ -d ${HOME}/bin ]; then
     PATH=$PATH:${HOME}/bin/
 fi
+if [ -d ${HOME}/bin/broot/x86_64-unknown-linux-gnu ]; then
+    PATH=$PATH:${HOME}/bin/broot/x86_64-unknown-linux-gnu
+fi
 if [ -f ${HOME}/bin/nvim.appimage ]; then
     if [ -d ${HOME}/bin/squashfs-root/usr/bin ]; then
         PATH=$PATH:${HOME}/bin/squashfs-root/usr/bin

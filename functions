@@ -252,3 +252,67 @@ function cdg()
 if [ -f ~/dotrepo/broot/launcher/bash/br ]; then
     source ~/dotrepo/broot/launcher/bash/br
 fi
+
+function ostype ()
+{
+    local ostype
+    local retval=1
+
+    if [ ! -z ${OSTYPE} ]; then
+        retval=0
+
+        case "$OSTYPE" in
+            solaris*) ostype="SOLARIS" ;;
+            darwin*)  ostype="OSX" ;; 
+            linux*)   ostype="LINUX" ;;
+            bsd*)     ostype="BSD" ;;
+            msys*)    ostype="WINDOWS" ;;
+            cygwin*)  ostype="WINDOWS" ;;
+            *)        ostype="unknown: $OSTYPE"; retval=2 ;;
+        esac        
+    fi
+
+    if [[ ${retval} -ne 0 ]]; then
+        retval=0
+
+        OS="$(uname)"
+        case $OS in
+            'SunOS')        ostype="SOLARIS" ;;
+            'Darwin')       ostype="OSX" ;;
+            'Linux')        ostype="LINUX" ;;
+            'FreeBSD')      ostype="BSD" ;;
+            'WindowsNT')    ostype="WINDOWS" ;;
+            *)              ostype="unknown: $OSTYPE-$OS"; retval=3;;
+        esac
+    fi
+
+    echo $ostype
+    return $retval
+}
+
+function install_binaries ()
+{
+    echo "Installing binaries - 1"
+
+    NVIM_PKG="https://github.com/neovim/neovim/releases/download/v0.9.1/nvim.appimage"
+    BROOT_PKG="https://github.com/Canop/broot/releases/download/v1.24.1/broot_1.24.1.zip"
+
+    if [ $(ostype) = "LINUX" ]; then
+        (set -x; cd bin;
+            if [ ! -f $(basename ${NVIM_PKG}) ]; then
+                wget ${NVIM_PKG};
+                chmod +x nvim.appimage;
+
+                ./nvim.appimage -v >/dev/null 2>&1
+                if [ $? -ne 0 ]; then
+                    # Appimage package needs to be extracted
+                    ./nvim.appimage --appimage-extract >/dev/null
+                fi
+            fi
+
+            if [ ! -f $(basename ${BROOT_PKG}) ]; then
+                wget ${BROOT_PKG};
+            fi
+        )
+    fi
+}

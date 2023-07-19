@@ -5,6 +5,7 @@
 - clean: ['~']
 
 - link:
+    ~/bin: bin
     ~/.bash_profile: bash_profile
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux.tpm
@@ -39,3 +40,4 @@
   - [cp -rf 3rd_party_submodules/bullet-train.zsh oh_my_zsh/custom/themes]
   - [cp -rf 3rd_party_submodules/powerlevel10k oh_my_zsh/custom/themes]
   - [cp -rf 3rd_party_submodules/powerlevel9k oh_my_zsh/custom/themes]
+  - [(source functions && install_binaries)]

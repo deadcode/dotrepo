@@ -43,10 +43,19 @@ export SVN_EDITOR=vim
 alias smartsvn='SMARTSVN_JAVA_HOME=/usr/java/latest /opt/smartsvn-6_6_11/bin/smartsvn.sh'
 
 alias myps='pstree -achlpu sdahiya'
+if [ -d ${HOME}/bin ]; then
+    PATH=$PATH:${HOME}/bin/
+fi
 if [ -f ${HOME}/bin/nvim.appimage ]; then
-    PATH=$PATH:${HOME}/bin/vim82/bin
-    alias nvim='${HOME}/bin/nvim.appimage'
-    EDITOR=$(eval echo '${HOME}/bin/nvim.appimage')
+    if [ -d ${HOME}/bin/squashfs-root/usr/bin ]; then
+        PATH=$PATH:${HOME}/bin/squashfs-root/usr/bin
+        alias nvim='${HOME}/bin/squashfs-root/usr/bin/nvim'
+        EDITOR=$(eval echo '${HOME}/bin/squashfs-root/usr/bin/nvim')
+    else
+        alias nvim='${HOME}/bin/nvim.appimage'
+        EDITOR=$(eval echo '${HOME}/bin/nvim.appimage')
+    fi
+    #PATH=$PATH:${HOME}/bin/vim82/bin
 elif [ -f ${HOME}/bin/vim80/bin/vim ]; then
     PATH=$PATH:${HOME}/bin/vim80/bin
 elif [ -f ${HOME}/bin/vim74/bin/vim ]; then

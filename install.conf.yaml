@@ -19,6 +19,7 @@
     ~/.vim: Vim
     ~/.aws: aws
     ~/.config/htop: config/htop
+    ~/.config/nvim: Nvim
     ~/.oh-my-zsh: oh_my_zsh
 
 - create:

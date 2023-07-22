@@ -29,3 +29,6 @@
 [submodule "ssh.keys"]
 	path = ssh.keys
 	url = https://github.com/deadcode/ssh.keys.git
+[submodule "Nvim"]
+	path = Nvim
+	url = https://github.com/deadcode/nvim-config.git

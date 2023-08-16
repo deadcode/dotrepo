@@ -4,3 +4,4 @@ aws/*
 bin/broot*
 bin/nvim.appimage
 bin/squashfs-root/
+bin/lazygit*

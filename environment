@@ -66,6 +66,9 @@ elif [ -f ${HOME}/bin/vim74/bin/vim ]; then
 fi
 EDITOR=${EDITOR:-vim}
 export EDITOR
+if [ -d ${HOME}/bin/uctags-2023.08.13-linux-x86_64 ]; then
+    PATH=${HOME}/bin/uctags-2023.08.13-linux-x86_64/bin:$PATH
+fi
 
 alias vi='vim'
 alias spacemacs="HOME=~/.spacemacs emacs -nw"

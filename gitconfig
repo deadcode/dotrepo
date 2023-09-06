@@ -33,3 +33,5 @@
 [alias]
 	root = rev-parse --show-toplevel
 	mod = !git status -s -uno | cut -c4-
+[diff]
+	tool = vimdiff

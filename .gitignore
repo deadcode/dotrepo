@@ -1,4 +1,5 @@
 Vim/bundle/*
+!Vim/bundle/Vundle.vim
 tmux.tpm/plugins/*
 aws/*
 bin/broot*

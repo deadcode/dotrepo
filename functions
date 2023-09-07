@@ -38,6 +38,7 @@ REMOTE_BOX_INFO=(
     "evb78xx-oct" "CN78XX-EVB-OCT"      "\${TERM_SERV_HW_LAB_1_IP}" "10015" "direct" "-" "-"                    "-"    "-"     "-"
     "evb73xx-mcu" "CN73XX-EVB-MCU"      "\${TERM_SERV_HW_LAB_2_IP}" "10015" "direct" "-" "-"                    "-"    "-"     "-"
     "evb73xx-oct" "CN73XX-EVB-OCT"      "\${TERM_SERV_HW_LAB_2_IP}" "10010" "direct" "-" "-"                    "-"    "-"     "-"
+    "hc1-sahana" "HC1-Sahan-Console"    "\${TERM_SERV_SAHANA_HC1}"  "6020"  "direct" "-" "\${HC1_SAHANA_IP}"    "-"    "-"     "-"
     );
 
 export TERM_SERV_1_IP="10.150.26.12"
@@ -53,6 +54,7 @@ export TERM_SERV_HW_LAB_1_IP="10.115.224.50"
 export TERM_SERV_HW_LAB_2_IP="10.115.224.51"
 export TERM_SERV_A13="10.120.6.113"
 export TERM_VM_1_IP="1.2.3.4"
+export TERM_SERV_SAHANA_HC1="10.120.6.148"
 
 export HD1_BOX_SSH_IP="10.115.14.11"
 export HB1_1_BOX_SSH_IP="10.115.14.9"
@@ -63,6 +65,7 @@ export HC3_3_BOX_SSH_IP="10.115.182.84"
 export HC1_1_BOX_SSH_IP="10.115.30.4"
 export HC1_3_BOX_SSH_IP="10.115.78.51"
 export VM1_BOX_SSH_IP="10.115.27.84"
+export HC1_SAHANA_IP="10.115.126.33"
 
 export GMTAP_UA_SSH_IP="10.115.126.201"
 export GMTAP_UB_SSH_IP="10.115.126.202"

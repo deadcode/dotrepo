@@ -180,8 +180,12 @@ function gvimd ()
 function update_gs_cscope_db ()
 {
     if [ -z ${PROD_CUSTOMER_ROOT} ]; then
-        echo "Please specify the working directory by sourcing the setup file"
-        return 1
+        if [ -d "$(pwd)/customer/" ]; then
+            PROD_CUSTOMER_ROOT="$(pwd)/customer/"
+        else
+            echo "Please specify the working directory by sourcing the setup file"
+            return 1
+        fi
     fi
 
     pushd ${PROD_CUSTOMER_ROOT}/gigasmart/
@@ -215,12 +219,18 @@ function update_gs_cscope_db ()
     echo "Directories = ${src_dirs[*]}"
     local -a src_files=($(find ${src_dirs[*]} \( -name .svn -prune -o -name obj* -prune \) -o \( -type f -name "*[chx]" -print \)))
     echo "Number of files to index = ${#src_files[@]}"
-    > cscope.files
+    if [ -x $(which truncate) ]; then
+        truncate -s0 cscope.files
+    else
+        > cscope.files
+    fi
+    #echo "${src_files[@]}"
     for f in "${src_files[@]}"; do
         echo "$f" >> cscope.files
     done
 
     #cscope -b -k -q -v ${src_files[*]}
+    echo "Building cscope DB"
     cscope -b -k -q -v -i cscope.files
 
     popd

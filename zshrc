@@ -164,3 +164,7 @@ source $ZSH/oh-my-zsh.sh
 # Separate history for each shell - do not share live history
 unsetopt inc_append_history
 unsetopt share_history
+
+if [ -f "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi

@@ -39,6 +39,8 @@ REMOTE_BOX_INFO=(
     "evb73xx-mcu" "CN73XX-EVB-MCU"      "\${TERM_SERV_HW_LAB_2_IP}" "10015" "direct" "-" "-"                    "-"    "-"     "-"
     "evb73xx-oct" "CN73XX-EVB-OCT"      "\${TERM_SERV_HW_LAB_2_IP}" "10010" "direct" "-" "-"                    "-"    "-"     "-"
     "hc1-sahana" "HC1-Sahan-Console"    "\${TERM_SERV_SAHANA_HC1}"  "6020"  "direct" "-" "\${HC1_SAHANA_IP}"    "-"    "-"     "-"
+    "gen4-1"     "Gen4-1-Console"       "0.0.0.0"                   "-"     "direct" "-" "\${GEN4_1_SSH_IP}"    "sdahiya" "-"   "-"
+    "gen4-2"     "Gen4-2-Console"       "0.0.0.0"                   "-"     "direct" "-" "\${GEN4_2_SSH_IP}"    "sdahiya" "-"   "-"
     );
 
 export TERM_SERV_1_IP="10.150.26.12"
@@ -66,6 +68,8 @@ export HC1_1_BOX_SSH_IP="10.115.30.4"
 export HC1_3_BOX_SSH_IP="10.115.78.51"
 export VM1_BOX_SSH_IP="10.115.27.84"
 export HC1_SAHANA_IP="10.115.126.33"
+export GEN4_1_SSH_IP="10.115.169.3"
+export GEN4_2_SSH_IP="10.115.169.4"
 
 export GMTAP_UA_SSH_IP="10.115.126.201"
 export GMTAP_UB_SSH_IP="10.115.126.202"

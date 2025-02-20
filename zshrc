@@ -131,7 +131,9 @@ plugins=(git
     screen
     themes
     tmux
-    vundle)
+    vundle
+    kubectl
+    minikube)
 
 source $ZSH/oh-my-zsh.sh
 

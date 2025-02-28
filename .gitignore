@@ -7,3 +7,4 @@ bin/nvim.appimage
 bin/squashfs-root/
 bin/lazygit*
 bin/uctags*
+bin/fzf*

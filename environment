@@ -31,6 +31,8 @@ alias lr='br -sdp'
 #export PATH=/home/sdahiya/Perforce/p4v-2010.1.256349/bin:$PATH
 # SVN client
 export SVN_EDITOR=vim
+# GO compiler PATH
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # PPC compiler tools
 [[ -d /opt/ppc/ecos/bin ]] && PATH=/opt/ppc/ecos/bin:$PATH

@@ -71,6 +71,9 @@ export EDITOR
 if [ -d ${HOME}/bin/uctags-2023.08.13-linux-x86_64 ]; then
     PATH=${HOME}/bin/uctags-2023.08.13-linux-x86_64/bin:$PATH
 fi
+if [ -d ${HOME}/.cargo/bin/ ]; then
+    PATH=$PATH:${HOME}/.cargo/bin
+fi
 
 alias vi='vim'
 alias spacemacs="HOME=~/.spacemacs emacs -nw"
@@ -86,3 +89,7 @@ export HOMEBREW_GITHUB_API_TOKEN="2672be0953ae00c8288e9a5161c11f2e5d8bb4c4"
 
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups  
+
+# AWS CLI Setup
+export AWS_CA_BUNDLE=
+export AWS_PROFILE=244919184467_aws-engineering-limited

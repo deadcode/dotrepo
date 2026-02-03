@@ -51,14 +51,14 @@ fi
 if [ -d ${HOME}/bin/broot/x86_64-unknown-linux-gnu ]; then
     PATH=$PATH:${HOME}/bin/broot/x86_64-unknown-linux-gnu
 fi
-if [ -f ${HOME}/bin/nvim.appimage ]; then
+if [ -f ${HOME}/bin/nvim-linux-x86_64.appimage ]; then
     if [ -d ${HOME}/bin/squashfs-root/usr/bin ]; then
         PATH=$PATH:${HOME}/bin/squashfs-root/usr/bin
         alias nvim='${HOME}/bin/squashfs-root/usr/bin/nvim'
         EDITOR=$(eval echo '${HOME}/bin/squashfs-root/usr/bin/nvim')
     else
-        alias nvim='${HOME}/bin/nvim.appimage'
-        EDITOR=$(eval echo '${HOME}/bin/nvim.appimage')
+        alias nvim='${HOME}/bin/nvim-linux-x86_64.appimage'
+        EDITOR=$(eval echo '${HOME}/bin/nvim-linux-x86_64.appimage')
     fi
     #PATH=$PATH:${HOME}/bin/vim82/bin
 elif [ -f ${HOME}/bin/vim80/bin/vim ]; then

@@ -1,0 +1,22 @@
+FROM ubuntu:rolling
+MAINTAINER Sandeep Dahiya sandeep.dahiya@gigamon.com
+
+ENV DEBIAN_FRONTEND="noninteractive" TZ="America/Los_Angeles"
+#FROM debian:latest
+
+RUN apt-get update
+RUN apt-get -y install neovim
+RUN apt-get -y install git
+RUN apt-get install -y locales
+RUN rm -rf /var/lib/apt/lists/*
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/X11/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
+
+RUN groupadd -r -g 264400513 domain
+RUN useradd -G sudo -g domain -u 264401214 --create-home sdahiya
+
+ENV HOME /home/sdahiya
+WORKDIR /home/sdahiya
+ENV SHELL /usr/bin/bash
+
+#CMD /usr/bin/emacs --reverse

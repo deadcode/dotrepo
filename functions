@@ -329,6 +329,8 @@ function install_binaries ()
                     # Appimage package needs to be extracted
                     ./nvim-linux-x86_64.appimage --appimage-extract >/dev/null
                 fi
+                # Extract appimage irrespective whether it works or not
+                ./nvim-linux-x86_64.appimage --appimage-extract >/dev/null
             fi
 
             if [ ! -f $(basename ${BROOT_PKG}) ]; then
@@ -365,6 +367,15 @@ function install_binaries ()
 
                 (tar zxvf $(basename ${FZF_PKG}))
             fi
+        )
+    fi
+
+    sudo docker image inspect nvim:0.4 >/dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+        ( \
+            mkdir -p ~/tmp/
+            cd ~/tmp/
+            sudo docker build -f ${HOME}/dotrepo/Dockerfile.nvim -t nvim:0.4 .
         )
     fi
 }

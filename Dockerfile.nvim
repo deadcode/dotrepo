@@ -7,6 +7,8 @@ ENV DEBIAN_FRONTEND="noninteractive" TZ="America/Los_Angeles"
 RUN apt-get update
 RUN apt-get -y install neovim
 RUN apt-get -y install git
+RUN apt-get -y install clang
+RUN apt-get -y install curl
 RUN apt-get install -y locales
 RUN rm -rf /var/lib/apt/lists/*
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/X11/locale/locale.alias en_US.UTF-8

@@ -11,6 +11,13 @@ if [[ $? -ne 0 ]]; then
     fi
 fi
 NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
+: "${DNVIM_DOCKER_TAG:='nvim:0.4'}"
+
+\sudo docker image inspect ${DNVIM_DOCKER_TAG} >/dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+    echo "Docker image not found. Please run install script"
+    exit 1
+fi
 
 #xhost +local:
 \sudo docker run -it --rm \
@@ -20,7 +27,7 @@ NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
     --user 264401214 \
     --hostname $(hostname -f) \
     -w $(pwd) \
-    nvim:0.5 \
+    ${DNVIM_DOCKER_TAG} \
     ${NVIM_EXE} $*
 
 #xhost -local:

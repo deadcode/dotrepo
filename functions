@@ -308,6 +308,7 @@ function ostype ()
     return $retval
 }
 
+export DNVIM_DOCKER_TAG="nvim:0.5"
 function install_binaries ()
 {
     echo "Installing binaries - 1"
@@ -370,12 +371,12 @@ function install_binaries ()
         )
     fi
 
-    sudo docker image inspect nvim:0.4 >/dev/null 2>&1
+    sudo docker image inspect ${DNVIM_DOCKER_TAG} >/dev/null 2>&1
     if [[ $? -ne 0 ]]; then
         ( \
             mkdir -p ~/tmp/
             cd ~/tmp/
-            sudo docker build -f ${HOME}/dotrepo/Dockerfile.nvim -t nvim:0.4 .
+            sudo docker build -f ${HOME}/dotrepo/Dockerfile.nvim -t ${DNVIM_DOCKER_TAG} .
         )
     fi
 }

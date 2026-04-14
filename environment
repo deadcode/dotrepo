@@ -32,7 +32,7 @@ alias lr='br -sdp'
 # SVN client
 export SVN_EDITOR=vim
 # GO compiler PATH
-export PATH="$PATH:$(go env GOPATH)/bin"
+# export PATH="$PATH:$(go env GOPATH)/bin"
 
 # PPC compiler tools
 [[ -d /opt/ppc/ecos/bin ]] && PATH=/opt/ppc/ecos/bin:$PATH

@@ -3,24 +3,24 @@
 NVIM_EXE=${HOME}/bin/nvim-linux-x86_64.appimage
 ${NVIM_EXE} --version >/dev/null 2>&1
 if [[ $? -ne 0 ]]; then
-  if [[ -f ${HOME}/bin/squashfs-root/AppRun ]]; then
-    NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
-  else
-    echo "NVIM executable not found"
-    exit 1
-  fi
+    if [[ -f ${HOME}/bin/squashfs-root/AppRun ]]; then
+        NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
+    else
+        echo "NVIM executable not found"
+        exit 1
+    fi
 fi
 NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
 
 #xhost +local:
-sudo docker run -it --rm \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v $HOME:/home/sdahiya/ \
-  -e DISPLAY=$DISPLAY \
-  --user 264401214 \
-  --hostname $(hostname -f) \
-  -w $(pwd) \
-  nvim:0.5 \
-  ${NVIM_EXE} $*
+\sudo docker run -it --rm \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME:/home/sdahiya/ \
+    -e DISPLAY=$DISPLAY \
+    --user 264401214 \
+    --hostname $(hostname -f) \
+    -w $(pwd) \
+    nvim:0.5 \
+    ${NVIM_EXE} $*
 
 #xhost -local:

@@ -78,7 +78,7 @@ fi
 alias vi='vim'
 alias spacemacs="HOME=~/.spacemacs emacs -nw"
 alias temacs="emacs -nw"
-alias sudo='sudo -E'
+#alias sudo='sudo -E'
 alias tmux='tmux -2'
 
 # For Floaterm inside VIM

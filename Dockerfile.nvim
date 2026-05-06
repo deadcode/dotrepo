@@ -1,5 +1,5 @@
 FROM ubuntu:rolling
-MAINTAINER Sandeep Dahiya sandeep.dahiya@gigamon.com
+MAINTAINER Sandeep Dahiya sdahiya@gmail.com
 
 ENV DEBIAN_FRONTEND="noninteractive" TZ="America/Los_Angeles"
 #FROM debian:latest

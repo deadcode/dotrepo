@@ -1,0 +1,131 @@
+#!/bin/bash
+
+#set -o errexit -o pipefail -o noclobber -o nounset
+export PS4='LINE ${LINENO}: '
+
+# ignore errexit with `&& true`
+getopt --test >/dev/null && true
+if [[ $? -ne 4 ]]; then
+    echo 'I’m sorry, `getopt --test` failed in this environment.'
+    exit 1
+fi
+
+saved_args="$*"
+
+progname="${0##*/}"
+
+# helper functions
+exit2() {
+    printf >&2 "%s:  %s: '%s'\n%s\n" "$CMD" "$1" "$2" "$USAGE"
+    exit 2
+}
+
+usage() {
+    cat <<HEREDOC
+    Usage: ${progname} [-r]
+
+HEREDOC
+}
+
+log() {
+    if [[ "${verbose}" == "y" ]]; then
+        │ printf "$*"
+    fi
+}
+logln() {
+    log "$*\n"
+}
+logerr() {
+    printf >&2 "$*\n"
+}
+
+# option --output/-o requires 1 argument You, 2026-04-23 - HD-82866 - Enable GS Gen3 Runtime Coverage
+LONGOPTS=debug,verbose,root
+OPTIONS=dvr
+
+# -temporarily store output to be able to check for errors
+# -activate quoting/enhanced mode (e.g. by writing out “--options”)
+# -pass arguments only via   -- "$@"   to separate them correctly
+# -if getopt fails, it complains itself to stdout
+PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$progname" -- "$@") || exit 2
+# read getopt’s output this way to handle the quoting right:
+eval set -- "$PARSED"
+
+verbose=n
+debug=n
+root=n
+USE_TTY=""
+
+# now enjoy the options in order and nicely split until we see --
+while true; do
+    case "$1" in
+    -v | --verbose)
+        verbose=y
+        shift
+        ;;
+    -d | --debug)
+        debug=y
+        shift
+        ;;
+    -r | --root)
+        root=y
+        shift
+        ;;
+    --)
+        shift
+        break
+        ;;
+    *)
+        shift
+        ;;
+    esac
+done
+
+if [[ "${debug}" == "y" ]]; then
+    set -x
+else
+    set +x
+fi
+if [[ "${verbose}" == "y" ]]; then
+    set -v
+else
+    set +v
+fi
+
+SHELL_EXE=/bin/bash
+#DEV_DOCKER_TAG='nvim:0.6'
+: "${DEV_DOCKER_TAG:=sdahiya-dev:0.7}"
+
+\sudo docker image inspect ${DEV_DOCKER_TAG} >/dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+    echo "Docker image not found. Please run install script"
+    exit 1
+fi
+
+HOMEDIR="/home/sdahiya/"
+USERID=264401214
+if [[ "${root}" == "y" ]]; then
+    USERID=0
+fi
+
+#echo "Remaining args:$*--"
+if [[ x"$1" != "x" ]] && [[ -x $(type -P $1) ]]; then
+    CMD_NAME=$(type -P $1)
+    shift
+    EXEC_CMD="${CMD_NAME} $*"
+else
+    EXEC_CMD="${SHELL_EXE} $*"
+fi
+
+#xhost +local:
+\sudo docker run -it --rm \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME:${HOMEDIR} \
+    -e DISPLAY=$DISPLAY \
+    --user ${USERID} \
+    --hostname $(hostname -f) \
+    -w $(pwd) \
+    ${DEV_DOCKER_TAG} \
+    ${EXEC_CMD}
+
+#xhost -local:

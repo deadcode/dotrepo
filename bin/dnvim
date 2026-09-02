@@ -1,33 +1,3 @@
 #!/bin/bash
 
-NVIM_EXE=${HOME}/bin/nvim-linux-x86_64.appimage
-${NVIM_EXE} --version >/dev/null 2>&1
-if [[ $? -ne 0 ]]; then
-    if [[ -f ${HOME}/bin/squashfs-root/AppRun ]]; then
-        NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
-    else
-        echo "NVIM executable not found"
-        exit 1
-    fi
-fi
-NVIM_EXE=${HOME}/bin/squashfs-root/AppRun
-: "${DNVIM_DOCKER_TAG:='nvim:0.4'}"
-
-\sudo docker image inspect ${DNVIM_DOCKER_TAG} >/dev/null 2>&1
-if [[ $? -ne 0 ]]; then
-    echo "Docker image not found. Please run install script"
-    exit 1
-fi
-
-#xhost +local:
-\sudo docker run -it --rm \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v $HOME:/home/sdahiya/ \
-    -e DISPLAY=$DISPLAY \
-    --user 264401214 \
-    --hostname $(hostname -f) \
-    -w $(pwd) \
-    ${DNVIM_DOCKER_TAG} \
-    ${NVIM_EXE} $*
-
-#xhost -local:
+devsh nvim $*

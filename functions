@@ -308,7 +308,7 @@ function ostype ()
     return $retval
 }
 
-export DNVIM_DOCKER_TAG="nvim:0.6"
+export DNVIM_DOCKER_TAG="sdahiya-dev:0.7"
 function install_binaries ()
 {
     echo "Installing binaries - 1"

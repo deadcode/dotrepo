@@ -92,9 +92,9 @@ else
     set +v
 fi
 
-SHELL_EXE=/bin/bash
+SHELL_EXE=/usr/bin/zsh
 #DEV_DOCKER_TAG='nvim:0.6'
-: "${DEV_DOCKER_TAG:=sdahiya-dev:0.7}"
+: "${DEV_DOCKER_TAG:=sdahiya-dev:0.8}"
 
 \sudo docker image inspect ${DEV_DOCKER_TAG} >/dev/null 2>&1
 if [[ $? -ne 0 ]]; then
@@ -109,10 +109,14 @@ if [[ "${root}" == "y" ]]; then
 fi
 
 #echo "Remaining args:$*--"
-if [[ x"$1" != "x" ]] && [[ -x $(type -P $1) ]]; then
-    CMD_NAME=$(type -P $1)
-    shift
-    EXEC_CMD="${CMD_NAME} $*"
+if [[ x"$1" != "x" ]]; then
+    if [[ -x $(type -P $1) ]]; then
+        CMD_NAME=$(type -P $1)
+        shift
+        EXEC_CMD="${CMD_NAME} $*"
+    else
+        EXEC_CMD="$*"
+    fi
 else
     EXEC_CMD="${SHELL_EXE} $*"
 fi

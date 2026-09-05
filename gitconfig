@@ -1,7 +1,9 @@
 [user]
 	name = Sandeep Dahiya
 	email = sandeep.dahiya@gigamon.com
-	username = sandeep.dahiya
+	#username = sandeep.dahiya
+	#email = sdahiya@gmail.com
+	username = deadcode
 [color]
 	ui = auto
 	branch = auto

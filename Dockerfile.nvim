@@ -17,6 +17,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y zsh
 RUN apt-get install -y sudo
 RUN apt-get install -y nodejs npm
+RUN apt-get install -y jq
 RUN rm -rf /var/lib/apt/lists/*
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/X11/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
@@ -25,7 +26,7 @@ RUN groupadd -r -g 264400513 domain
 RUN useradd -G sudo -g domain -u 264401214 -s /usr/bin/zsh --create-home sdahiya
 RUN echo 'sdahiya:sdahiya123!!' | chpasswd
 
-# Install Auggie CLI
+# Install Auggie CLI and dependencies
 RUN npm install -g @augmentcode/auggie
 
 USER sdahiya

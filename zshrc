@@ -46,7 +46,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ${DOTFILES_DIR}/10k.zsh ]] || source ${DOTFILES_DIR}/ p10k.zsh
+[[ ! -f ${DOTFILES_DIR}/p10k.zsh ]] || source ${DOTFILES_DIR}/p10k.zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

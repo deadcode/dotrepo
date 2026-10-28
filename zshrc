@@ -137,7 +137,8 @@ plugins=(git
     brew
     kubectl
     minikube
-    aws)
+    aws
+    glab)
 
 source $ZSH/oh-my-zsh.sh
 

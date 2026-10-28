@@ -14,7 +14,7 @@ compinit
 # End of lines added by compinstall
 
 # All dotfiles are versioned in DOTFILES_DIR
-DOTFILES_DIR=~/Code/dotrepo
+DOTFILES_DIR=~/dotrepo
 
 if [ -n "${BASH_VERSION}" ] && [ -f ${DOTFILES_DIR}/iterm2_shell_integration ]; then
     source ${DOTFILES_DIR}/iterm2_shell_integration.bash

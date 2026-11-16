@@ -39,3 +39,6 @@ source /home/sdahiya/.config/broot/launcher/bash/br
 
 complete -C /opt/homebrew/bin/terraform terraform
 complete -C '$(which aws_completer)' aws
+
+test -e "${HOME}/dotrepo/iterm2_shell_integration.bash" && source "${HOME}/dotrepo/iterm2_shell_integration.bash"
+

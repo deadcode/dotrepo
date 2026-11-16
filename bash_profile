@@ -22,3 +22,5 @@ source /home/sdahiya/.config/broot/launcher/bash/br
 
 complete -C /opt/homebrew/bin/terraform terraform
 complete -C '$(which aws_completer)' aws
+
+source /Users/sdahiya/.config/broot/launcher/bash/br

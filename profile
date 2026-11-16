@@ -34,3 +34,8 @@ ZSH_BIN=$(which zsh)
 if [ ! -z ${ZSH_BIN} ] && [ -f ${ZSH_BIN} ] && [ -x ${ZSH_BIN} ]; then
     exec zsh
 fi
+
+source /home/sdahiya/.config/broot/launcher/bash/br
+
+complete -C /opt/homebrew/bin/terraform terraform
+complete -C '$(which aws_completer)' aws
